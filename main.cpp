@@ -75,7 +75,7 @@ int main() {
     //insert_sort(losowe);
     qsort(&losowe[0],losowe.size(),sizeof(int),compvar);
     for(int i = 0;i<losowe.size();i++){
-        std::cout<<losowe[i]<<" ";
+        std::cout<<losowe[i]<<",";
     }
 
 
