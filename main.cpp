@@ -2,6 +2,13 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <string>
+struct Obywatel{
+    std::string imie;
+    int wiek;
+    int ID;
+};
+
 int compvar(const void *one, const void *two)
 {
     int a = *((int*)one);
@@ -58,25 +65,64 @@ void insert_sort(std::vector<int>& losowe){
         losowe[j]=key;
     }
 }
+const int ch_MAX = 26;
+std::string RandomString(int ch)
+{
+    char alpha[ch_MAX] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
+                           'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                           'o', 'p', 'q', 'r', 's', 't', 'u',
+                           'v', 'w', 'x', 'y', 'z' };
+    std::string result = "";
+    for (int i = 0; i<ch; i++)
+        result = result + alpha[rand() % ch_MAX];
+
+    return result;
+}
+
+
+std::vector<Obywatel> tworzenie(int n){
+    std::vector<Obywatel> ludzie(n);
+    for(int i; i<ludzie.size(); i++){
+        ludzie[i].imie= RandomString(15);
+        ludzie[i].wiek= random_number(0,100);
+        ludzie[i].ID= random_number(0,10000000000);
+    }
+    return ludzie;
+}
+void display_student (Obywatel student){
+    std::cout<<"--------------------------------"<<std::endl;
+    std::cout<<"Imie: "<<student.imie<<std::endl;
+    std::cout<<"Wiek: "<<student.wiek<<std::endl;
+    std::cout<<"ID: "<<student.ID<<std::endl;
+    std::cout<<"--------------------------------"<<std::endl;
+}
+void display_all_students(const std::vector<Obywatel>& vec){
+    for(int i=0;i<vec.size();i+=1){
+        display_student(vec[i]);
+    }
+}
 int main() {
     srand(time(NULL));
-    const int n = 20;
+   /* const int n = 20;
     int A=-100;
     int B=555;
-    std::vector<int>losowe(n);
-    for(int i = 0;i<losowe.size();i++){
-        losowe[i]= random_number(A,B);
-    }
+  //  std::vector<int>losowe(n);
+  //  for(int i = 0;i<losowe.size();i++){
+    //    losowe[i]= random_number(A,B);
+    //}
     for(int i = 0;i<losowe.size();i++){
         std::cout<<losowe[i]<<" ";
     }
     std::cout<<std::endl;
     //bubble_sort(losowe);
     //insert_sort(losowe);
-    qsort(&losowe[0],losowe.size(),sizeof(int),compvar);
-    for(int i = 0;i<losowe.size();i++){
-        std::cout<<losowe[i]<<",";
-    }
+    qsort(&losowe[0],losowe.size(),sizeof(int),compvar);*/
+    std::vector<Obywatel> ludzie = tworzenie(2137);
+    display_all_students(ludzie);
+
+
+
+
 
 
 
